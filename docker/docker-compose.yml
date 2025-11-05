@@ -2,10 +2,7 @@ version: '3.8'
 
 services:
   cloudpaste:
-    build:
-      context: ..
-      dockerfile: docker/Dockerfile
-    image: cloudpaste:latest
+    image: ghcr.io/mrtian2016/cloudpaste:latest
     container_name: cloudpaste
     restart: unless-stopped
 
@@ -15,6 +12,6 @@ services:
 
     # 暴露端口
     ports:
-      - "8811:5280"
+      - "5280:5280"
 
   
