@@ -1,0 +1,5 @@
+/* Localized versions of Info.plist keys */
+
+CFBundleName = "云剪贴板";
+CFBundleDisplayName = "云剪贴板";
+NSHumanReadableCopyright = "版权所有 mrtian2016@gmail.com 保留所有权利。";

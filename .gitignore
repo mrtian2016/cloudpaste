@@ -1,0 +1,16 @@
+/desktop.backup.vite
+node_modules
+# IDE
+.vscode/
+.idea/
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Environment
+.env
+.env.local
+.env.*.local
+/docker/data

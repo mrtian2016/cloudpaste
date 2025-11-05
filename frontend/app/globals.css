@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+/* Tailwind v4: 使用 @source 指定需要扫描的路径 */
+@source "../../packages/shared/components";
+@source "../../packages/shared/lib";
+@source "../app";
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 9%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: 0 0% 6%;
+    --foreground: 0 0% 93%;
+  }
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
+}

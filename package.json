@@ -1,0 +1,15 @@
+{
+  "name": "cloudpaste",
+  "version": "0.1.1",
+  "private": true,
+  "description": "云剪贴板 - CloudPaste Monorepo",
+  "scripts": {
+    "dev": "pnpm -F cloudpaste_frontend dev",
+    "dev:desktop": "pnpm -F cloudpaste-desktop tauri:dev",
+    "build": "pnpm -F cloudpaste_frontend build",
+    "build:desktop": "pnpm -F cloudpaste-desktop tauri:build",
+    "lint": "pnpm -r lint",
+    "version:update": "node scripts/update-version.mjs"
+  },
+  "packageManager": "pnpm@9.0.0"
+}

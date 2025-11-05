@@ -1,0 +1,59 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "CloudPaste",
+  "version": "0.1.1",
+  "identifier": "net.pyer.cloudpaste",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1480",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../out"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "云剪贴板",
+        "width": 1100,
+        "height": 800,
+        "maxWidth": 1100,
+        "minWidth": 1100,
+        "maxHeight": 800,
+        "minHeight": 800,
+        "resizable": false
+      }
+    ],
+    "security": {
+      "csp": null,
+      "assetProtocol": {
+        "enable": true,
+        "scope": [
+          "$APPCACHE/**"
+        ]
+      }
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "resources": [
+      "zh-Hans.lproj"
+    ],
+    "createUpdaterArtifacts": true,
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  },
+  "plugins": {
+    "updater": {
+      "endpoints": [
+        "https://github.com/mrtian2016/wire-vault/releases/latest/download/latest.json"
+      ],
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEQ1OTMxMkI3RjJCNjU3NkYKUldSdlY3Ynl0eEtUMVRueVd1bEM1a0FyeXRHYkQyclNpM1c4bURJTHhNcUdqL0pDVmpuODdCeVEK"
+    }
+  }
+}
