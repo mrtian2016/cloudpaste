@@ -545,8 +545,6 @@ docker run -d -p 5280:5280 \
 <summary><b>数据安全吗？会丢失吗？</b></summary>
 
 - 所有数据存储在 SQLite 数据库和文件系统中
-- 使用 Docker Volume 持久化存储
-- 建议定期备份 `data` 和 `uploads` 目录
 - 支持配置 HTTPS 加密传输
 
 数据完全由你掌控，不会因为第三方服务问题而丢失。
