@@ -58,6 +58,18 @@ The backend service uses **WebSocket** for real-time bidirectional communication
 
 ---
 
+## 📸 Preview
+
+<div align="center">
+
+![Desktop Application](./screens/desktop-app-screenshot.png)
+
+*Desktop Application - Clean and intuitive clipboard history management interface*
+
+</div>
+
+---
+
 ## ✨ Core Features
 
 ### 📋 Multi-Format Content Support

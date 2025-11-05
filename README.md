@@ -58,6 +58,18 @@ CloudPaste 采用**自建后端服务**的架构设计，而非传统的云服�
 
 ---
 
+## 📸 应用预览
+
+<div align="center">
+
+![桌面应用界面](./screens/desktop-app-screenshot.png)
+
+*桌面端应用 - 简洁直观的剪贴板历史管理界面*
+
+</div>
+
+---
+
 ## ✨ 核心特性
 
 ### 📋 多格式内容支持
