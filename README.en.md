@@ -14,16 +14,28 @@ A powerful cross-platform clipboard synchronization tool that seamlessly transfe
 
 ---
 
-> [!IMPORTANT]
-> **This is a self-hosted application!**
->
-> CloudPaste requires you to deploy your own backend service (supports one-click Docker deployment).
->
-> - 📦 Docker Image: `ghcr.io/mrtian2016/cloudpaste:latest`
-> - 🔧 Based on FastAPI + WebSocket
-> - 💾 Data stored on your own server
->
-> [👉 View Quick Deployment Guide](#-quick-start)
+## ⚠️ Important Notes
+
+### 🏗️ This is a Self-Hosted Application!
+
+CloudPaste requires you to deploy your own backend service (supports one-click Docker deployment).
+
+- 📦 Docker Image: `ghcr.io/mrtian2016/cloudpaste:latest`
+- 🔧 Based on FastAPI + WebSocket
+- 💾 Data stored on your own server
+
+[👉 View Quick Deployment Guide](#-quick-start)
+
+### 📌 Tool Positioning
+
+CloudPaste is a **cross-device cloud sync tool**, not a local clipboard manager:
+
+- ✅ **Primary Use**: Real-time clipboard syncing across multiple devices
+- ✅ **Best For**: Multi-device workflows (phone, computer, tablet, etc.)
+- ❌ **Not**: Local clipboard history manager (like Ditto, CopyQ, etc.)
+
+If you only need clipboard history management on a single computer, consider using dedicated local clipboard tools.
+If you need seamless copy-paste sync across multiple devices, CloudPaste is the perfect choice.
 
 ---
 
@@ -253,6 +265,25 @@ docker-compose down
 3. **First Use**: Configure your server address on login page (e.g., `http://your-server-ip:5280`)
 4. Register/Login
 5. Start using! App will automatically monitor system clipboard and sync
+
+**⚠️ macOS Users Notice**
+
+When first opening the app, macOS may show: `"CloudPaste.app" is damaged and can't be opened. You should move it to the Trash.`
+
+This is because the app is not verified by Apple. Follow these steps to fix:
+
+1. Open "Terminal" app
+2. Run the following command (adjust path based on actual installation location):
+   ```bash
+   # If installed in Applications folder
+   sudo xattr -r -d com.apple.quarantine /Applications/CloudPaste.app
+
+   # Or if in another location, replace with actual path
+   sudo xattr -r -d com.apple.quarantine /path/to/CloudPaste.app
+   ```
+3. Enter your system password, then the app will open normally
+
+💡 **What does this do?** The `xattr` command removes the quarantine attribute flag from macOS. This flag blocks unsigned apps downloaded from the internet. This operation only removes the restriction without modifying the app itself.
 
 #### Method 2: Web Version
 

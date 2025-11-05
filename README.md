@@ -14,16 +14,28 @@
 
 ---
 
-> 
-> **这是一个自建服务应用！**
->
-> CloudPaste 需要你自己部署后端服务（支持 Docker 一键部署）。
->
-> - 📦 Docker 镜像：`ghcr.io/mrtian2016/cloudpaste:latest`
-> - 🔧 基于 FastAPI + WebSocket
-> - 💾 数据存储在你自己的服务器上
->
-> [👉 查看快速部署指南](#-快速开始)
+## ⚠️ 重要说明
+
+### 🏗️ 这是一个自建服务应用！
+
+CloudPaste 需要你自己部署后端服务（支持 Docker 一键部署）。
+
+- 📦 Docker 镜像：`ghcr.io/mrtian2016/cloudpaste:latest`
+- 🔧 基于 FastAPI + WebSocket
+- 💾 数据存储在你自己的服务器上
+
+[👉 查看快速部署指南](#-快速开始)
+
+### 📌 工具定位说明
+
+CloudPaste 是一个**跨设备云同步工具**，而非本地剪贴板管理器：
+
+- ✅ **主要用途**：在多个设备间实时同步剪贴板内容
+- ✅ **适合场景**：手机、电脑、平板等多设备协作
+- ❌ **不是**：本地剪贴板历史管理工具（如 Ditto、CopyQ 等）
+
+如果你只需要在单台电脑上管理剪贴板历史，建议使用专门的本地剪贴板工具。
+如果你需要在多个设备间无缝同步复制内容，CloudPaste 是理想选择。
 
 ---
 
@@ -253,6 +265,25 @@ docker-compose down
 3. **首次使用**：在登录页面配置你的服务器地址（如 `http://your-server-ip:5280`）
 4. 注册/登录账号
 5. 开始使用！应用会自动监听系统剪贴板并同步
+
+**⚠️ macOS 用户注意事项**
+
+首次打开应用时，macOS 系统可能会提示 `"CloudPaste.app"已损坏，无法打开。你应该将它移到废纸篓。`
+
+这是因为应用未经过 Apple 验证。请按以下步骤解决：
+
+1. 打开"终端"应用
+2. 执行以下命令（根据应用的实际安装位置调整路径）：
+   ```bash
+   # 如果安装在应用程序文件夹
+   sudo xattr -r -d com.apple.quarantine /Applications/CloudPaste.app
+
+   # 或者如果在其他位置，替换为实际路径
+   sudo xattr -r -d com.apple.quarantine /path/to/CloudPaste.app
+   ```
+3. 输入系统密码后，应用即可正常打开
+
+💡 **这是什么操作？** `xattr` 命令用于移除 macOS 的隔离属性（quarantine）标记。这个标记会阻止从互联网下载的未签名应用运行。此操作仅移除限制，不会修改应用本身。
 
 #### 方式二：使用 Web 版
 
