@@ -1,171 +1,171 @@
-# CloudPaste - Cloud Clipboard
+# CloudPaste - 云剪贴板
 
 <div align="center">
 
-English | [简体中文](./README.zh.md)
+[English](./README.en.md) | 简体中文
 
-A powerful cross-platform clipboard synchronization tool that seamlessly transfers your copied content across multiple devices.
+一款强大的跨平台剪贴板同步工具，让你的复制内容在多个设备间无缝流转。
 
-**Self-Hosted • Data Sovereignty • Security & Control**
+**自建服务 • 数据自主 • 安全可控**
 
-[Features](#-core-features) • [Use Cases](#-use-cases) • [Quick Start](#-quick-start) • [Platform Support](#-platform-support)
+[特性](#-核心特性) • [使用场景](#-使用场景) • [快速开始](#-快速开始) • [平台支持](#-平台支持)
 
 </div>
 
 ---
 
-> [!IMPORTANT]
-> **This is a self-hosted application!**
+> 
+> **这是一个自建服务应用！**
 >
-> CloudPaste requires you to deploy your own backend service (supports one-click Docker deployment).
+> CloudPaste 需要你自己部署后端服务（支持 Docker 一键部署）。
 >
-> - 📦 Docker Image: `ghcr.io/mrtian2016/cloudpaste:latest`
-> - 🔧 Based on FastAPI + WebSocket
-> - 💾 Data stored on your own server
+> - 📦 Docker 镜像：`ghcr.io/mrtian2016/cloudpaste:latest`
+> - 🔧 基于 FastAPI + WebSocket
+> - 💾 数据存储在你自己的服务器上
 >
-> [👉 View Quick Deployment Guide](#-quick-start)
+> [👉 查看快速部署指南](#-快速开始)
 
 ---
 
-## 🔐 Why Self-Hosted?
+## 🔐 为什么选择自建？
 
-CloudPaste adopts a **self-hosted backend service** architecture instead of traditional cloud services:
+CloudPaste 采用**自建后端服务**的架构设计，而非传统的云服务模式：
 
-- **🔒 Data Privacy** - All clipboard data stored on your own server, fully under your control
-- **🚀 Performance Control** - No worries about third-party service throttling or instability
-- **💰 Cost Transparency** - Use your own server, no subscription fees
-- **🛠️ Full Customization** - Modify and extend features according to your needs
-- **🌍 Intranet Deployment** - Supports deployment in private networks without internet access
+- **🔒 数据隐私** - 所有剪贴板数据存储在你自己的服务器上，完全掌控
+- **🚀 性能可控** - 无需担心第三方服务限速或不稳定
+- **💰 成本透明** - 使用自己的服务器，无需支付订阅费用
+- **🛠️ 完全定制** - 可以根据需求修改和扩展功能
+- **🌍 内网部署** - 支持部署在内网环境，无需公网访问
 
-### How It Works
+### 工作原理
 
 ```
 ┌─────────────┐                  ┌─────────────────┐                  ┌─────────────┐
-│Desktop/Web  │ ◄──WebSocket──► │ Your Backend    │ ◄──WebSocket──► │Desktop/Web  │
-│ (Device A)  │                  │  (Self-hosted)  │                  │ (Device B)  │
+│  桌面端/Web  │ ◄──WebSocket──► │  你的后端服务器  │ ◄──WebSocket──► │  桌面端/Web  │
+│  (设备 A)   │                  │   (自建部署)    │                  │  (设备 B)   │
 └─────────────┘                  └─────────────────┘                  └─────────────┘
       ▲                                   │                                   ▲
-      │                                   │ Storage                           │
-      └──────────── Real-time Sync ──────┼──────── Real-time Sync ──────────┘
+      │                                   │ 存储                               │
+      └───────────────── 实时同步 ────────┼──────────── 实时同步 ─────────────┘
                                           ▼
                                    ┌──────────┐
                                    │  SQLite  │
-                                   │ Database │
+                                   │  数据库   │
                                    └──────────┘
 ```
 
-The backend service uses **WebSocket** for real-time bidirectional communication. When any device copies content, it's instantly pushed to all online devices.
+后端服务通过 **WebSocket** 实现实时双向通信，当任一设备复制内容时，立即推送到所有在线设备。
 
 ---
 
-## ✨ Core Features
+## ✨ 核心特性
 
-### 📋 Multi-Format Content Support
+### 📋 多格式内容支持
 
-- **Text Content** - Supports plain text, code snippets, HTML content, and various text formats
-- **Image Files** - Cloud storage and sync for common image formats like PNG, JPG, GIF
-- **Various Files** - Supports uploading and syncing any file type (documents, audio/video, archives, etc.)
-- **Smart Preview** - Automatically recognizes content types for optimal preview experience
+- **文本内容** - 支持纯文本、代码片段、HTML 内容等多种文本格式
+- **图片文件** - PNG、JPG、GIF 等常见图片格式的云端存储和同步
+- **各类文件** - 支持上传和同步任意类型的文件（文档、音视频、压缩包等）
+- **智能预览** - 自动识别内容类型，提供最佳预览体验
 
-### 🔄 Real-Time Sync
+### 🔄 实时同步
 
-- **Instant Push** - Using WebSocket technology, copied content syncs immediately to all devices
-- **Multi-Device Online** - Real-time device online status display, selective sync to specific devices
-- **History** - All clipboard content automatically saved, view and restore anytime
-- **Conflict Resolution** - Intelligently handles simultaneous operations from multiple devices
+- **即时推送** - 使用 WebSocket 技术，复制内容立即同步到所有设备
+- **多设备在线** - 实时显示设备在线状态，选择性同步到指定设备
+- **历史记录** - 所有剪贴板内容自动保存，随时查看和恢复
+- **冲突处理** - 智能处理多设备同时操作的情况
 
-### 🔍 Powerful Search
+### 🔍 强大搜索
 
-- **Full-Text Search** - Quickly search clipboard history
-- **Type Filtering** - Filter by text, image, or file type
-- **Device Filtering** - View copy records from specific devices
-- **Favorites** - Bookmark important content, support favorites-only view
+- **全文搜索** - 快速搜索历史剪贴板内容
+- **类型筛选** - 按文本、图片、文件类型过滤
+- **设备筛选** - 查看特定设备的复制记录
+- **收藏功能** - 标记重要内容，支持仅显示收藏项
 
-### 💻 Cross-Platform Experience
+### 💻 跨平台体验
 
-- **Desktop Application** - Lightweight native app built with Tauri
-  - System tray resident for quick access
-  - Automatic system clipboard monitoring
-  - Native file operation support
-  - Auto-start on boot (optional)
-  - In-app auto-update
+- **桌面端应用** - 基于 Tauri 打造的轻量级原生应用
+  - 系统托盘常驻，快捷访问
+  - 自动监听系统剪贴板
+  - 原生文件操作支持
+  - 开机自启动（可选）
+  - 应用内自动更新
 
-- **Web Version** - No installation required, use in browser
-  - Responsive design for all screen sizes
-  - Mobile device support
-  - PWA support (Progressive Web App)
+- **Web 网页版** - 无需安装，浏览器即可使用
+  - 响应式设计，适配各种屏幕
+  - 支持移动端访问
+  - PWA 支持（渐进式 Web 应用）
 
-### 🎨 Modern Interface
+### 🎨 现代化界面
 
-- **Dark Mode** - Automatically adapts to system theme
-- **Intuitive Interaction** - Clean and clear operation interface
-- **Quick Operations** - One-click copy, favorite, delete
-- **Batch Management** - Multi-select and batch delete support
-- **Content Preview** - Click to preview full content
-  - Image preview (with zoom)
-  - Code syntax highlighting
-  - Audio/video playback
-  - Text file viewer
+- **深色模式** - 自动适配系统主题
+- **直观交互** - 简洁清晰的操作界面
+- **快捷操作** - 一键复制、收藏、删除
+- **批量管理** - 支持多选和批量删除
+- **内容预览** - 点击即可预览完整内容
+  - 图片预览（支持缩放）
+  - 代码高亮显示
+  - 音视频播放
+  - 文本文件查看器
 
-### 🔒 Security & Reliability
+### 🔒 安全可靠
 
-- **User Authentication** - Access data only after login
-- **Device Management** - View and manage all logged-in devices
-- **Data Isolation** - Each user's data completely independent
-- **Quota Management** - Configurable history limit
+- **用户认证** - 登录后才能访问数据
+- **设备管理** - 查看和管理所有已登录设备
+- **数据隔离** - 每个用户的数据完全独立
+- **配额管理** - 可设置历史记录保存上限
 
-### ⚡ Convenient Features
+### ⚡ 便捷功能
 
-- **Smart Recognition** - Automatically recognizes and formats code snippets
-- **One-Click Download** - Quickly download images and files locally
-- **Tag Management** - Add tags to categorize clipboard content
-- **Paginated Browsing** - Efficiently load large history
-- **Device Info** - Shows source device and timestamp for each record
-
----
-
-## 🎯 Use Cases
-
-### 👨‍💻 Developers
-
-- Copy code snippets on your phone, immediately use in IDE on computer
-- Quickly transfer API tokens, URLs during cross-device debugging
-- Save commonly used code templates and config snippets
-
-### ✍️ Content Creators
-
-- Sync text and creative ideas across devices
-- Collect and organize various material links
-- Quickly share images and media files
-
-### 📱 Daily Use
-
-- Copy address on phone, use directly on computer
-- Transfer temporary files across devices
-- Cloud backup of important information
-
-### 👥 Team Collaboration
-
-- Quickly share temporary info with team members
-- Unified management of team text templates
-- Cross-device collaborative work
+- **智能识别** - 自动识别代码片段并格式化显示
+- **一键下载** - 快速下载图片和文件到本地
+- **标签管理** - 为剪贴板内容添加标签分类
+- **分页浏览** - 高效加载大量历史记录
+- **设备信息** - 显示每条记录的来源设备和时间
 
 ---
 
-## 🚀 Quick Start
+## 🎯 使用场景
 
-> **Important Note**: CloudPaste is a self-hosted application. You need to deploy the backend service first, then connect clients (desktop or web) to your server. This ensures your clipboard data is completely under your control, more secure and reliable.
+### 👨‍💻 开发者
 
-### Step 1: Deploy Backend Service
+- 在手机上看到代码片段，复制后立即在电脑 IDE 中使用
+- 跨设备调试时快速传递 API Token、URL 等信息
+- 保存常用的代码模板和配置片段
 
-Backend service based on FastAPI + WebSocket, provides real-time sync capability.
+### ✍️ 内容创作者
 
-#### Method 1: Docker Deployment (Recommended)
+- 在多个设备间同步文案、创意想法
+- 收集和整理各种素材链接
+- 快速分享图片和媒体文件
 
-This is the simplest and fastest deployment method:
+### 📱 日常使用
+
+- 手机上复制的地址，电脑上直接使用
+- 临时文件跨设备传输
+- 重要信息云端备份
+
+### 👥 团队协作
+
+- 快速分享临时信息给团队成员
+- 统一管理团队常用的文本模板
+- 跨设备协同工作
+
+---
+
+## 🚀 快速开始
+
+> **重要说明**：CloudPaste 是一个需要自建后端服务的应用。你需要先部署后端服务，然后客户端（桌面应用或 Web 版）连接到你的服务器。这样可以确保你的剪贴板数据完全由自己掌控，更加安全可靠。
+
+### 第一步：部署后端服务
+
+后端服务基于 FastAPI + WebSocket，提供实时同步能力。
+
+#### 方式一：使用 Docker 部署（推荐）
+
+这是最简单快速的部署方式：
 
 ```bash
-# Pull and run image
+# 拉取镜像并运行
 docker run -d \
   --name cloudpaste \
   --restart unless-stopped \
@@ -174,14 +174,14 @@ docker run -d \
   ghcr.io/mrtian2016/cloudpaste:latest
 ```
 
-**Parameter Description:**
-- `-p 5280:5280` - Port mapping (default port 5280, can be changed, e.g., `-p 8000:5280`)
-- `-v ./data:/cloudpaste` - Persist all data (database + uploaded files) to data folder in current directory
-- `--restart unless-stopped` - Container auto-restart
+**参数说明：**
+- `-p 5280:5280` - 映射端口（默认端口 5280，可以改成你需要的，如 `-p 8000:5280`）
+- `-v ./data:/cloudpaste` - 持久化所有数据（数据库 + 上传文件）到当前目录的 data 文件夹
+- `--restart unless-stopped` - 容器自动重启
 
-**Custom Port Example:**
+**自定义端口示例：**
 ```bash
-# Use port 8000
+# 使用 8000 端口
 docker run -d \
   --name cloudpaste \
   --restart unless-stopped \
@@ -190,11 +190,11 @@ docker run -d \
   ghcr.io/mrtian2016/cloudpaste:latest
 ```
 
-After startup, visit `http://your-server-ip:5280/docs` to view API documentation and confirm service is running.
+启动后访问 `http://your-server-ip:5280/docs` 查看 API 文档，确认服务正常运行。
 
-#### Method 2: Docker Compose Deployment
+#### 方式二：Docker Compose 部署
 
-Create `docker-compose.yml`:
+创建 `docker-compose.yml`：
 
 ```yaml
 version: '3.8'
@@ -205,226 +205,226 @@ services:
     container_name: cloudpaste
     restart: unless-stopped
 
-    # Only need to map one directory!
+    # 只需要映射一个目录！
     volumes:
       - ./data:/cloudpaste
 
-    # Expose port
+    # 暴露端口
     ports:
       - "5280:5280"
 ```
 
-Start service:
+启动服务：
 
 ```bash
 docker-compose up -d
 ```
 
-View logs:
+查看日志：
 
 ```bash
 docker-compose logs -f
 ```
 
-Stop service:
+停止服务：
 
 ```bash
 docker-compose down
 ```
 
-### Step 2: Use Client
+### 第二步：使用客户端
 
-#### Method 1: Desktop Application (Recommended)
+#### 方式一：下载桌面应用（推荐）
 
-1. Go to [Releases](../../releases) to download installer for your platform
-2. Install and launch app
-3. **First Use**: Configure your server address on login page (e.g., `http://your-server-ip:5280`)
-4. Register/Login
-5. Start using! App will automatically monitor system clipboard and sync
+1. 前往 [Releases](../../releases) 下载对应平台的安装包
+2. 安装并启动应用
+3. **首次使用**：在登录页面配置你的服务器地址（如 `http://your-server-ip:5280`）
+4. 注册/登录账号
+5. 开始使用！应用会自动监听系统剪贴板并同步
 
-#### Method 2: Web Version
+#### 方式二：使用 Web 版
 
-1. Deploy frontend to your server or use local development
-2. Access web address
-3. **First Use**: Configure server address (e.g., `http://your-server-ip:5280`)
-4. Register/Login
-5. Start using
+1. 部署前端到你的服务器或使用本地开发
+2. 访问 Web 地址
+3. **首次使用**：配置服务器地址（如 `http://your-server-ip:5280`）
+4. 注册/登录账号
+5. 开始使用
 
-### Developer Deployment
+### 开发者部署
 
 <details>
-<summary>Click to expand detailed deployment steps</summary>
+<summary>点击展开详细部署步骤</summary>
 
-#### Requirements
+#### 环境要求
 
-- **Backend**: Python 3.12+
-- **Frontend**: Node.js 18+
-- **Desktop**: Rust (cargo)
-- **Package Manager**: pnpm 9.0+
+- **后端**: Python 3.12+
+- **前端**: Node.js 18+
+- **桌面端**: Rust (cargo)
+- **包管理器**: pnpm 9.0+
 
-#### 1. Start Backend Service
+#### 1. 启动后端服务
 
 ```bash
-# Create Python environment
+# 创建 Python 环境
 mamba create -n cloudpaste python=3.12
 conda activate cloudpaste
 
-# Install dependencies
+# 安装依赖
 cd backend
 mamba install loguru fastapi aiosqlite pydantic-settings -y
 
-# Start service (default port 8000)
+# 启动服务（默认端口 8000）
 python main.py
 ```
 
-Backend API Docs: http://localhost:8000/docs
+后端 API 文档：http://localhost:8000/docs
 
-#### 2. Start Web Frontend
+#### 2. 启动 Web 前端
 
 ```bash
-# Install dependencies (in project root)
+# 安装依赖（在项目根目录）
 pnpm install
 
-# Start web version (port 3000)
+# 启动 Web 版（端口 3000）
 pnpm dev
 ```
 
-Visit: http://localhost:3000
+访问：http://localhost:3000
 
-#### 3. Build Desktop App
+#### 3. 构建桌面应用
 
 ```bash
-# Development mode
+# 开发模式
 pnpm dev:desktop
 
-# Build production version
+# 构建生产版本
 pnpm build:desktop
 ```
 
-Build output in `desktop/src-tauri/target/release/`
+构建产物位于 `desktop/src-tauri/target/release/`
 
 </details>
 
 ---
 
-## 📦 Platform Support
+## 📦 平台支持
 
-| Platform | Support Status | Notes |
-|----------|---------------|-------|
-| 🪟 Windows | ✅ Full Support | Desktop + Web |
-| 🍎 macOS | ✅ Full Support | Desktop + Web |
-| 🐧 Linux | ✅ Full Support | Desktop + Web |
-| 📱 iOS / Android | ⚠️ Web Only | Via browser |
+| 平台 | 支持情况 | 说明 |
+|------|---------|------|
+| 🪟 Windows | ✅ 完全支持 | 桌面应用 + Web 版 |
+| 🍎 macOS | ✅ 完全支持 | 桌面应用 + Web 版 |
+| 🐧 Linux | ✅ 完全支持 | 桌面应用 + Web 版 |
+| 📱 iOS / Android | ⚠️ Web 版 | 通过浏览器使用 |
 
 ---
 
-## 🏗️ Project Architecture
+## 🏗️ 项目架构
 
 ```
 cloudpaste/
-├── backend/              # FastAPI backend service
-│   ├── main.py          # Application entry
-│   ├── routers/         # API routes
-│   ├── database.py      # Database operations
-│   └── models.py        # Data models
+├── backend/              # FastAPI 后端服务
+│   ├── main.py          # 应用入口
+│   ├── routers/         # API 路由
+│   ├── database.py      # 数据库操作
+│   └── models.py        # 数据模型
 │
-├── frontend/            # Next.js web app
-│   ├── app/            # Pages and routes
-│   └── public/         # Static assets
+├── frontend/            # Next.js Web 应用
+│   ├── app/            # 页面和路由
+│   └── public/         # 静态资源
 │
-├── desktop/            # Tauri desktop app
+├── desktop/            # Tauri 桌面应用
 │   ├── app/           # Next.js UI
-│   ├── src-tauri/     # Rust backend
-│   └── lib/           # Tauri utilities
+│   ├── src-tauri/     # Rust 后端
+│   └── lib/           # Tauri 工具函数
 │
-└── packages/          # Shared code
-    └── shared/        # Components, hooks, state management
-        ├── components/  # UI components
+└── packages/          # 共享代码
+    └── shared/        # 组件、hooks、状态管理
+        ├── components/  # UI 组件
         ├── hooks/       # React Hooks
-        ├── store/       # Zustand state management
-        ├── lib/         # Utility functions
-        └── types/       # TypeScript types
+        ├── store/       # Zustand 状态管理
+        ├── lib/         # 工具函数
+        └── types/       # TypeScript 类型
 ```
 
-**Tech Stack**: Next.js 16 + React 19 + TypeScript + Tailwind CSS 4 + Tauri 2 + FastAPI + SQLite
+**技术栈**：Next.js 16 + React 19 + TypeScript + Tailwind CSS 4 + Tauri 2 + FastAPI + SQLite
 
 ---
 
-## 📖 Feature Details
+## 📖 功能详解
 
-### Desktop-Specific Features
+### 桌面端特有功能
 
-- **System Clipboard Monitoring** - Automatically captures copy operations and syncs
-- **Clipboard Writing** - Restore content from cloud to system clipboard (supports text, images, files)
-- **System Tray** - Minimize to tray, quick access
-- **Auto-Start** - Run silently in background
-- **Native Notifications** - Receive sync notifications
-- **App Updates** - Automatic update detection and installation
-- **Local Cache** - Smart caching for images and files
+- **系统剪贴板监听** - 自动捕获复制操作并同步
+- **剪贴板写入** - 从云端恢复内容到系统剪贴板（支持文本、图片、文件）
+- **系统托盘** - 最小化到托盘，快速访问
+- **开机自启** - 后台静默运行
+- **原生通知** - 接收同步通知
+- **应用更新** - 自动检测和安装更新
+- **本地缓存** - 图片和文件智能缓存
 
-### API Features
+### API 功能
 
 <details>
-<summary>View all API endpoints</summary>
+<summary>查看所有 API 端点</summary>
 
-#### Authentication
-- `POST /api/v1/auth/register` - User registration
-- `POST /api/v1/auth/login` - User login
-- `GET /api/v1/auth/me` - Get current user info
-- `PUT /api/v1/auth/me` - Update user info
-- `GET /api/v1/auth/settings` - Get user settings
-- `PUT /api/v1/auth/settings` - Update user settings
+#### 认证相关
+- `POST /api/v1/auth/register` - 用户注册
+- `POST /api/v1/auth/login` - 用户登录
+- `GET /api/v1/auth/me` - 获取当前用户信息
+- `PUT /api/v1/auth/me` - 更新用户信息
+- `GET /api/v1/auth/settings` - 获取用户设置
+- `PUT /api/v1/auth/settings` - 更新用户设置
 
-#### Clipboard Management
-- `POST /api/v1/clipboard/` - Add clipboard item
-- `GET /api/v1/clipboard/` - Get list (supports pagination, search, filtering)
-- `GET /api/v1/clipboard/{id}` - Get details
-- `PUT /api/v1/clipboard/{id}` - Update (favorite, etc.)
-- `DELETE /api/v1/clipboard/{id}` - Delete
-- `DELETE /api/v1/clipboard/` - Batch delete
+#### 剪贴板管理
+- `POST /api/v1/clipboard/` - 添加剪贴板项
+- `GET /api/v1/clipboard/` - 获取列表（支持分页、搜索、筛选）
+- `GET /api/v1/clipboard/{id}` - 获取详情
+- `PUT /api/v1/clipboard/{id}` - 更新（收藏等）
+- `DELETE /api/v1/clipboard/{id}` - 删除
+- `DELETE /api/v1/clipboard/` - 批量删除
 
-#### Device Management
-- `POST /api/v1/devices/` - Register device
-- `GET /api/v1/devices/` - Get device list
-- `GET /api/v1/devices/{id}` - Get device details
-- `DELETE /api/v1/devices/{id}` - Delete device
+#### 设备管理
+- `POST /api/v1/devices/` - 注册设备
+- `GET /api/v1/devices/` - 获取设备列表
+- `GET /api/v1/devices/{id}` - 获取设备详情
+- `DELETE /api/v1/devices/{id}` - 删除设备
 
-#### File Management
-- `POST /api/v1/files/upload` - Upload file
-- `GET /api/v1/files/download/{file_id}` - Download file
-- `GET /api/v1/files/info/{file_id}` - Get file info
-- `DELETE /api/v1/files/delete/{file_id}` - Delete file
+#### 文件管理
+- `POST /api/v1/files/upload` - 上传文件
+- `GET /api/v1/files/download/{file_id}` - 下载文件
+- `GET /api/v1/files/info/{file_id}` - 获取文件信息
+- `DELETE /api/v1/files/delete/{file_id}` - 删除文件
 
 #### WebSocket
-- `WS /api/v1/ws` - Real-time sync channel
+- `WS /api/v1/ws` - 实时同步通道
 
 </details>
 
 ---
 
-## ⚙️ Configuration
+## ⚙️ 配置说明
 
-### Backend Configuration
+### 后端配置
 
-#### Docker Data Persistence
+#### Docker 数据持久化
 
-Docker image stores all data in `/cloudpaste` directory, including:
-- Database file (SQLite)
-- User uploaded files (images, documents, etc.)
-- Log files
+Docker 镜像会将所有数据存储在 `/cloudpaste` 目录，包括：
+- 数据库文件（SQLite）
+- 用户上传的文件（图片、文档等）
+- 日志文件
 
-Only need to map one directory:
+只需要映射一个目录即可：
 ```bash
 -v ./data:/cloudpaste
 ```
 
-Data is saved in host's `./data` directory, won't be lost when container restarts or updates.
+数据会保存在宿主机的 `./data` 目录中，容器重启或更新不会丢失数据。
 
-#### Using Reverse Proxy (Recommended)
+#### 使用反向代理（推荐）
 
-For security and better performance, recommend using Nginx or Caddy for reverse proxy with HTTPS:
+为了安全性和更好的性能，建议使用 Nginx 或 Caddy 进行反向代理，并配置 HTTPS：
 
-**Nginx Configuration Example:**
+**Nginx 配置示例：**
 
 ```nginx
 server {
@@ -447,7 +447,7 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
 
-        # WebSocket support
+        # WebSocket 支持
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -456,7 +456,7 @@ server {
 }
 ```
 
-**Caddy Configuration Example (Simpler):**
+**Caddy 配置示例（更简单）：**
 
 ```caddy
 paste.yourdomain.com {
@@ -464,45 +464,45 @@ paste.yourdomain.com {
 }
 ```
 
-Caddy automatically configures HTTPS certificates!
+Caddy 会自动配置 HTTPS 证书！
 
-### Frontend Configuration
+### 前端配置
 
-Web and desktop versions support configuring server address at login, no code modification needed.
+Web 版和桌面端支持在登录时配置服务器地址，无需修改代码。
 
-**Configuration Examples:**
-- Local development: `http://localhost:5280`
-- Intranet deployment: `http://192.168.1.100:5280`
-- Public deployment: `https://paste.yourdomain.com` (HTTPS recommended)
+**配置示例：**
+- 本地开发：`http://localhost:5280`
+- 内网部署：`http://192.168.1.100:5280`
+- 公网部署：`https://paste.yourdomain.com`（推荐使用 HTTPS）
 
-### Security Recommendations
+### 安全建议
 
-- ✅ Use HTTPS for encrypted transmission (via reverse proxy)
-- ✅ Configure firewall rules, only open necessary ports
-- ✅ Regularly backup database and uploaded files
-- ✅ Use strong password policy
-- ✅ Intranet use doesn't need public exposure
+- ✅ 使用 HTTPS 加密传输（通过反向代理配置）
+- ✅ 配置防火墙规则，仅开放必要端口
+- ✅ 定期备份数据库和上传文件
+- ✅ 使用强密码策略
+- ✅ 内网使用可以不暴露公网
 
 ---
 
-## ❓ FAQ
+## ❓ 常见问题
 
 <details>
-<summary><b>Why self-hosted? Can't I just use it directly?</b></summary>
+<summary><b>为什么需要自建服务？不能直接用吗？</b></summary>
 
-CloudPaste's design philosophy is to give users complete control of their data. Clipboard content may contain sensitive information (passwords, tokens, private text, etc.), storing them on third-party servers poses privacy risks. By self-hosting:
+CloudPaste 的设计理念是让用户完全掌控自己的数据。剪贴板内容可能包含敏感信息（密码、Token、私密文本等），将其存储在第三方服务器存在隐私风险。通过自建服务：
 
-- Your data is only stored on your own server
-- Can be deployed on intranet, completely unexposed to public network
-- No worries about third-party services shutting down or charging fees
-- Can customize features as needed
+- 你的数据只存储在自己的服务器上
+- 可以部署在内网，完全不暴露到公网
+- 无需担心第三方服务跑路或收费
+- 可以按需定制功能
 
 </details>
 
 <details>
-<summary><b>Is deploying backend service complicated?</b></summary>
+<summary><b>部署后端服务复杂吗？</b></summary>
 
-Very simple! With Docker, just one command:
+非常简单！使用 Docker 只需一条命令：
 
 ```bash
 docker run -d -p 5280:5280 \
@@ -510,118 +510,118 @@ docker run -d -p 5280:5280 \
   ghcr.io/mrtian2016/cloudpaste:latest
 ```
 
-If you have a VPS or NAS, can be deployed in 5 minutes.
+如果你有 VPS 或 NAS，5 分钟内就能部署完成。
 
 </details>
 
 <details>
-<summary><b>What kind of server is needed?</b></summary>
+<summary><b>需要什么样的服务器？</b></summary>
 
-**Minimum specs:**
-- CPU: 1 core
-- RAM: 512MB
-- Storage: 1GB (grows with usage)
+**最低配置：**
+- CPU: 1 核
+- 内存: 512MB
+- 存储: 1GB（根据使用量增长）
 
-Almost any server, NAS, even Raspberry Pi can run it. Recommended:
-- VPS (Alibaba Cloud, Tencent Cloud, AWS, etc.)
-- Home NAS (Synology, QNAP, etc. with Docker support)
-- Intranet server
-
-</details>
-
-<details>
-<summary><b>Is data secure? Will it be lost?</b></summary>
-
-- All data stored in SQLite database and file system
-- Uses Docker Volume for persistent storage
-- Recommend regularly backing up `data` and `uploads` directories
-- Supports HTTPS encrypted transmission
-
-Data is completely under your control, won't be lost due to third-party service issues.
+几乎任何服务器、NAS、甚至树莓派都能运行。推荐：
+- VPS（阿里云、腾讯云、AWS 等）
+- 家用 NAS（群晖、威联通等支持 Docker）
+- 内网服务器
 
 </details>
 
 <details>
-<summary><b>Can multiple people use it?</b></summary>
+<summary><b>数据安全吗？会丢失吗？</b></summary>
 
-Yes! CloudPaste supports multi-user:
-- Each user registers independent account
-- User data completely isolated
-- Each user can manage multiple devices
-- Suitable for teams or families sharing one backend service
+- 所有数据存储在 SQLite 数据库和文件系统中
+- 使用 Docker Volume 持久化存储
+- 建议定期备份 `data` 和 `uploads` 目录
+- 支持配置 HTTPS 加密传输
 
-</details>
-
-<details>
-<summary><b>Can I use it on mobile?</b></summary>
-
-Yes, via web version:
-- iOS/Android access through browser
-- Supports PWA (Progressive Web App), can add to home screen
-- Mobile can view history, search, copy content
-- Automatic clipboard monitoring not supported (browser limitation)
+数据完全由你掌控，不会因为第三方服务问题而丢失。
 
 </details>
 
 <details>
-<summary><b>How to access intranet deployment from outside?</b></summary>
+<summary><b>可以多人使用吗？</b></summary>
 
-Several solutions:
-1. **Intranet Penetration**: Use frp, ngrok, etc.
-2. **VPN**: Connect to intranet via VPN
-3. **Public Server**: Deploy directly on server with public IP
-4. **Intranet Only**: No external access needed, more secure
+可以！CloudPaste 支持多用户：
+- 每个用户注册独立账号
+- 用户之间的数据完全隔离
+- 每个用户可以管理多个设备
+- 适合团队或家庭共用一个后端服务
 
 </details>
 
 <details>
-<summary><b>Which platforms are supported?</b></summary>
+<summary><b>手机可以使用吗？</b></summary>
 
-**Desktop App:**
+可以通过 Web 版使用：
+- iOS/Android 通过浏览器访问
+- 支持 PWA（渐进式 Web 应用），可以添加到主屏幕
+- 手机端可以查看历史、搜索、复制内容
+- 暂不支持自动监听手机剪贴板（浏览器限制）
+
+</details>
+
+<details>
+<summary><b>内网部署如何在外网访问？</b></summary>
+
+几种方案：
+1. **内网穿透**：使用 frp、ngrok 等工具
+2. **VPN**：通过 VPN 连接到内网
+3. **公网服务器**：直接部署在有公网 IP 的服务器上
+4. **仅内网使用**：不需要外网访问，更安全
+
+</details>
+
+<details>
+<summary><b>支持哪些平台？</b></summary>
+
+**桌面应用：**
 - ✅ Windows 10/11
 - ✅ macOS 11+
-- ✅ Linux (Ubuntu, Debian, Fedora, etc.)
+- ✅ Linux (Ubuntu, Debian, Fedora 等)
 
-**Web Version:**
-- ✅ All modern browsers (Chrome, Firefox, Safari, Edge)
-- ✅ Mobile browsers (iOS Safari, Android Chrome)
+**Web 版：**
+- ✅ 所有现代浏览器（Chrome, Firefox, Safari, Edge）
+- ✅ 移动端浏览器（iOS Safari, Android Chrome）
 
 </details>
 
 <details>
-<summary><b>Will it affect system clipboard?</b></summary>
+<summary><b>会影响系统剪贴板吗？</b></summary>
 
-Desktop app monitors system clipboard, but:
-- Only reads, doesn't interfere with normal copy-paste
-- Can disable auto-sync in settings
-- Restoring from app to clipboard won't trigger duplicate sync
+桌面应用会监听系统剪贴板，但：
+- 只读取，不会干扰正常复制粘贴
+- 可以在设置中关闭自动同步
+- 从应用恢复到剪贴板时不会触发重复同步
 
 </details>
 
 ---
 
-## 🤝 Contributing
+## 🤝 贡献
 
-Issues and Pull Requests are welcome!
+欢迎提交 Issue 和 Pull Request！
 
 ---
 
-## 📄 License
+## 📄 许可证
 
 MIT License
 
 ---
 
-## 🔗 Links
+## 🔗 相关链接
 
-- [Issue Tracker](../../issues)
-- [Feature Requests](../../issues/new)
-- [Changelog](../../releases)
+- [问题反馈](../../issues)
+- [功能建议](../../issues/new)
+- [更新日志](../../releases)
 
 ---
 
 <div align="center">
 
-**CloudPaste - Your Clipboard, Everywhere**
+**CloudPaste - 让剪贴板无处不在**
 
 </div>
